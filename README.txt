@@ -12,6 +12,7 @@ problems list by importance(top-to-bottom)
     fix background(add progress markers)
     fix sprite(animation)
     sound effects for right and wrong answers
+    add background music
 
 -------------------
 Hello, to use pygame activate virtual env and
