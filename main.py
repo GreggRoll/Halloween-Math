@@ -7,11 +7,22 @@ window_width = 720
 win = pygame.display.set_mode((window_len, window_width))
 pygame.display.set_caption("Halloween Math")
 char = pygame.image.load('undertale.png')
+    #TODO
+    #crop out whitespace on undertale
+    #create animation frames for movement
 bg = pygame.image.load('graveyard(1280x720).png')
+    #TODO
+    #add 10 headstones to work as progress markers
 
 lives = 3
+    #TODO
+    #create graphics for lives
+    #can use for i in lives draw(life.png) x + 50
+
 font = pygame.font.SysFont('comicsans', 30, True)
 
+    #TODO 
+    #create class for user
 x = 100
 y = 560
 width = 64
@@ -32,6 +43,9 @@ def redrawGameWindow():
     #draw sprite
     win.blit(char, (x, y, width, height))
     #update
+    #TODO
+    #create input box for answers
+
     pygame.display.update()
 
 #main loop
@@ -43,6 +57,8 @@ while lives >= 0:
         if event.type == pygame.QUIT:
             pygame.quit()
     
+    #TODO
+    #use game.py to get random questions
     question = 'what is 1 + 2?'
     if question == False:
         lives -= 1
