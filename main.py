@@ -6,7 +6,7 @@ window_len = 1280
 window_width = 720
 win = pygame.display.set_mode((window_len, window_width))
 pygame.display.set_caption("Halloween Math")
-char = pygame.image.load('undertale.png')
+char = pygame.image.load('ghost-trick-or-treating-hi.png')
     #TODO
     #crop out whitespace on undertale
     #create animated frames for movement
@@ -36,8 +36,8 @@ font = pygame.font.SysFont('comicsans', 30, True)
     #create class for user
 x = 83
 y = 560
-char_width = 64
-char_height = 64
+char_width = 10
+char_height = 10
 
 
 def redrawGameWindow():
@@ -100,20 +100,24 @@ while 1:
                 text = text[:-1]
             else:
                 text += event.unicode
-    #TODO
-    #use game.py to get random questions
-    
     if done == True:
         answr = False
         if text == answer:
             answr = True
-            x += 205
             progress += 1
             getnewquestion = True
-            
+            for i in range(20):
+                x += 10.25
+                redrawGameWindow()
         else:
             lives -= 1
             getnewquestion = True
+    if lives == 0:
+        pass
+        #TODO dark souls you died overlay
+    if progress == 5:
+        pass
+        #TODO you win!
     
     redrawGameWindow()
 

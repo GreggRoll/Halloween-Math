@@ -1,20 +1,11 @@
 import random
 import operator
 
-ops = {
-        '+':operator.add,
-        '-':operator.sub,
-        '*':operator.mul,
-        }
-num1 = random.randint(0,12)
-num2 = random.randint(1,10)
-op = random.choice(list(ops.keys()))
-
 def randomCalc():
     ops = {'+':operator.add,
            '-':operator.sub,
            '*':operator.mul,}
-    num1 = random.randint(0,12)
+    num1 = random.randint(0,10)
     num2 = random.randint(1,10)
     op = random.choice(list(ops.keys()))
     nums = [num1, op, num2]
