@@ -8,10 +8,11 @@ problems list by importance(top-to-bottom)
     center question
     create class for user to clean up code
     create graphics for lives(maybe some kind of pixel heart?)
-    fix background(add progress markers)
     fix sprite(animation)
     sound effects for right and wrong answers
     add background music
+    add 2nd frame
+        after reaching 5 i want the window to scroll to the 2nd pane where #10 will be a little party / the gate for trick-or-treating
 
 -------------------
 Hello, to use pygame activate virtual env and

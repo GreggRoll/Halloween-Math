@@ -34,7 +34,7 @@ font = pygame.font.SysFont('comicsans', 30, True)
 
     #TODO 
     #create class for user
-x = 100
+x = 83
 y = 560
 char_width = 64
 char_height = 64
@@ -107,7 +107,7 @@ while 1:
         answr = False
         if text == answer:
             answr = True
-            x += 105
+            x += 205
             progress += 1
             getnewquestion = True
             
