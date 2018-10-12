@@ -7,6 +7,7 @@ window_width = 720
 win = pygame.display.set_mode((window_len, window_width))
 pygame.display.set_caption("Halloween Math")
 char = pygame.image.load('ghost-trick-or-treating-hi.png')
+u_dead = pygame.image.load('youdied.png')
     #TODO
     #crop out whitespace on undertale
     #create animated frames for movement
@@ -26,6 +27,7 @@ progress = 0
     #TODO
     #if progress = 10 make it so game is over and halloween candy flies around or somthing
 lives = 3
+
     #TODO
     #create graphics for lives
     #can use for i in lives draw(life.png) x + 50
@@ -59,8 +61,8 @@ def redrawGameWindow():
     input_box.w = width
     win.blit(answer_txt, (input_box.x+5, input_box.y+5))
     pygame.draw.rect(win, (255, 100, 0), input_box, 2)
-    #TODO
-    #create input box for answers
+    if dead == True:
+        win.blit(u_dead, (0, 0, 1280, 720))
 
     pygame.display.update()
 
@@ -76,45 +78,56 @@ question = questionText(nums)
 answer = str(getAnswer(nums))
 getnewquestion = False
 while 1:
-    if getnewquestion == True:
-        nums = randomCalc()
-        question = questionText(nums)
-        answer = str(getAnswer(nums))
-        getnewquestion = False
-        text = ''
-    #make somthing so that a screen apears when lives are less than 0
     pygame.time.delay(100)
-    done = False
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-        #TODO
-        #store input and compare once random questions is working
-        #will need to try/except incase anyone tries to use letters
+    if lives <= 0:
+        dead = True
+    else:
+        dead = False
+    while dead == False:
+        if getnewquestion == True:
+            nums = randomCalc()
+            question = questionText(nums)
+            answer = str(getAnswer(nums))
+            getnewquestion = False
+            text = ''
+        #make somthing so that a screen apears when lives are less than 0
+        
+        done = False
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+            #TODO
+            #store input and compare once random questions is working
+            #will need to try/except incase anyone tries to use letters
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    print(text)
+                    print(answer)
+                    done = True
+                elif event.key == pygame.K_BACKSPACE:
+                    text = text[:-1]
+                else:
+                    text += event.unicode
+        if done == True:
+            answr = False
+            if text == answer:
+                answr = True
+                progress += 1
+                getnewquestion = True
+                for i in range(20):
+                    x += 10.25
+                    redrawGameWindow()
+            else:
+                lives -= 1
+                getnewquestion = True
+        redrawGameWindow()
+    while dead == True:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RETURN:
-                print(text)
-                print(answer)
-                done = True
-            elif event.key == pygame.K_BACKSPACE:
-                text = text[:-1]
-            else:
-                text += event.unicode
-    if done == True:
-        answr = False
-        if text == answer:
-            answr = True
-            progress += 1
-            getnewquestion = True
-            for i in range(20):
-                x += 10.25
-                redrawGameWindow()
-        else:
-            lives -= 1
-            getnewquestion = True
-    if lives == 0:
-        pass
-        #TODO dark souls you died overlay
+                lives = 3
+        redrawGameWindow()
+        
+
     if progress == 5:
         pass
         #TODO you win!
