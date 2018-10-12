@@ -9,11 +9,23 @@ pygame.display.set_caption("Halloween Math")
 char = pygame.image.load('undertale.png')
     #TODO
     #crop out whitespace on undertale
-    #create animation frames for movement
+    #create animated frames for movement
+
+#input box rect
+#will become area for inputz
+input_box = pygame.Rect(540, 250, 100, 32)
+text = ''
+active = False
+color_inactive = pygame.Color('lightskyblue3')
+color_active = pygame.Color('dodgerblue2')
+color = color_inactive
+
 bg = pygame.image.load('graveyard(1280x720).png')
     #TODO
     #add 10 headstones to work as progress markers
-
+progress = 0
+    #TODO
+    #if progress = 10 make it so game is over and halloween candy flies around or somthing
 lives = 3
     #TODO
     #create graphics for lives
@@ -25,8 +37,8 @@ font = pygame.font.SysFont('comicsans', 30, True)
     #create class for user
 x = 100
 y = 560
-width = 64
-height = 64
+char_width = 64
+char_height = 64
 
 
 def redrawGameWindow():
@@ -41,8 +53,13 @@ def redrawGameWindow():
     pygame.draw.rect(win,(160,160,160), (547, 190, 186, 41))
     win.blit(question_text, (557, 200))#166, 21
     #draw sprite
-    win.blit(char, (x, y, width, height))
+    win.blit(char, (x, y, char_width, char_height))
     #update
+    answer_txt = font.render(text, True, (255, 255, 255))
+    width = max(200, answer_txt.get_width()+10)
+    input_box.w = width
+    win.blit(answer_txt, (input_box.x+5, input_box.y+5))
+    pygame.draw.rect(win, (255, 100, 0), input_box, 2)
     #TODO
     #create input box for answers
 
@@ -51,19 +68,45 @@ def redrawGameWindow():
 #main loop
 run = True
 while lives >= 0:
+    #make somthing so that a screen apears when lives are less than 0
     pygame.time.delay(100)
-
+    done = False
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
-    
+        #TODO
+        #store input and compare once random questions is working
+        #will need to try/except incase anyone tries to use letters
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_RETURN:
+                print(text)
+                text = ''
+                done = True
+            elif event.key == pygame.K_BACKSPACE:
+                text = text[:-1]
+            else:
+                text += event.unicode
     #TODO
     #use game.py to get random questions
     question = 'what is 1 + 2?'
-    if question == False:
-        lives -= 1
-    if question == True: 
-        x += 10
+    if done == True:
+        answr = False
+        try:
+            text = int(text)
+        except:
+            #user didnt enter a number
+            text = ''
+        if text == 3:
+            answr = True
+            x += 105
+            progress += 1
+        else:
+            lives -= 1
+    text = str(text)
+
+    
+    
+       
        
     redrawGameWindow()
 

@@ -5,7 +5,7 @@ if you get one wrong you lose a life lose all 3 lives
 
 problems list by importance(top-to-bottom)
 
-    create input box for answer to questions
+    get input box string to int working
     use game.py to randomize questions
     create class for user
     create graphics for lives(maybe some kind of pixel heart?)
