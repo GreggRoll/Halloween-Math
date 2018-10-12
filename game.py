@@ -5,7 +5,6 @@ ops = {
         '+':operator.add,
         '-':operator.sub,
         '*':operator.mul,
-        '/':operator.truediv
         }
 num1 = random.randint(0,12)
 num2 = random.randint(1,10)
@@ -14,33 +13,24 @@ op = random.choice(list(ops.keys()))
 def randomCalc():
     ops = {'+':operator.add,
            '-':operator.sub,
-           '*':operator.mul,
-           '/':operator.truediv}
+           '*':operator.mul,}
     num1 = random.randint(0,12)
     num2 = random.randint(1,10)
     op = random.choice(list(ops.keys()))
-    return num1, op, num2
+    nums = [num1, op, num2]
+    return nums
 
-def questionText():
-    pass
+def questionText(nums):
+    return f"{nums[0]} {nums[1]} {nums[2]}"
 
-def askQuestion():
-    answer = randomCalc()
+
+def getAnswer(nums):
+    if nums[1] == '+':
+        answer = nums[0] + nums[2]
+    if nums[1] == '-':
+        answer = nums[0] - nums[2]
+    if nums[1] == '*':
+        answer = nums[0] * nums[2]
     return answer
 
-def getInput():
-    guess = float(input())
-    return guess
-
-def quiz():
-    print('Welcome. This is a 10 question math quiz\n')
-    score = 0
-    for i in range(10):
-        correct = askQuestion()
-        if correct:
-            score += 1
-            print('Correct!\n')
-        else:
-            print('Incorrect!\n')
-    return f'Your score was {score}/10'
 

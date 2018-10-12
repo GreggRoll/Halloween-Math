@@ -1,5 +1,5 @@
 import pygame
-from game import askQuestion
+from game import *
 pygame.init()
 
 window_len = 1280
@@ -67,6 +67,12 @@ def redrawGameWindow():
 
 #main loop
 run = True
+
+
+nums = randomCalc()
+question = questionText(nums)
+answer = str(getAnswer(nums))
+
 while 1:
     #make somthing so that a screen apears when lives are less than 0
     pygame.time.delay(100)
@@ -80,7 +86,7 @@ while 1:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RETURN:
                 print(text)
-                text = ''
+                print(answer)
                 done = True
             elif event.key == pygame.K_BACKSPACE:
                 text = text[:-1]
@@ -88,10 +94,10 @@ while 1:
                 text += event.unicode
     #TODO
     #use game.py to get random questions
-    question = 'what is 1 + 2?'
+    
     if done == True:
         answr = False
-        if text == 3:
+        if text == answer:
             answr = True
             x += 105
             progress += 1
