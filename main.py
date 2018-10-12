@@ -67,7 +67,7 @@ def redrawGameWindow():
 
 #main loop
 run = True
-while lives >= 0:
+while 1:
     #make somthing so that a screen apears when lives are less than 0
     pygame.time.delay(100)
     done = False
@@ -90,12 +90,7 @@ while lives >= 0:
     #use game.py to get random questions
     question = 'what is 1 + 2?'
     if done == True:
-        answr = False
-        try:
-            text = int(text)
-        except:
-            #user didnt enter a number
-            text = ''
+        answr = False]
         if text == 3:
             answr = True
             x += 105
