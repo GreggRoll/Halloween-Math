@@ -90,7 +90,7 @@ while 1:
     #use game.py to get random questions
     question = 'what is 1 + 2?'
     if done == True:
-        answr = False]
+        answr = False
         if text == 3:
             answr = True
             x += 105
@@ -98,7 +98,6 @@ while 1:
         else:
             lives -= 1
     text = str(text)
-
     
     
        
