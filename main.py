@@ -12,7 +12,6 @@ char = pygame.image.load('undertale.png')
     #create animated frames for movement
 
 #input box rect
-#will become area for inputz
 input_box = pygame.Rect(540, 250, 100, 32)
 text = ''
 active = False
@@ -67,13 +66,22 @@ def redrawGameWindow():
 
 #main loop
 run = True
+getnewquestion = False
+
+
 
 
 nums = randomCalc()
 question = questionText(nums)
 answer = str(getAnswer(nums))
-
+getnewquestion = False
 while 1:
+    if getnewquestion == True:
+        nums = randomCalc()
+        question = questionText(nums)
+        answer = str(getAnswer(nums))
+        getnewquestion = False
+        text = ''
     #make somthing so that a screen apears when lives are less than 0
     pygame.time.delay(100)
     done = False
@@ -101,12 +109,11 @@ while 1:
             answr = True
             x += 105
             progress += 1
+            getnewquestion = True
+            
         else:
             lives -= 1
-    text = str(text)
+            getnewquestion = True
     
-    
-       
-       
     redrawGameWindow()
 

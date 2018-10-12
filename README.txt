@@ -5,8 +5,8 @@ if you get one wrong you lose a life lose all 3 lives
 
 problems list by importance(top-to-bottom)
 
-    use game.py to randomize questions
-    create class for user
+    center question
+    create class for user to clean up code
     create graphics for lives(maybe some kind of pixel heart?)
     fix background(add progress markers)
     fix sprite(animation)
