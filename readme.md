@@ -1,3 +1,7 @@
+#Hello
+
+[](screenshot.PNG)
+
 This is a small spooky mathgame
 ideally it will have 10 questions you must answer
 if you get one wrong you lose a life lose all 3 lives 
