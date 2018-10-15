@@ -7,8 +7,8 @@ def randomCalc(difficulty):
     ops = {'+':operator.add,
            '-':operator.sub,
            '*':operator.mul,}
-    num1 = random.randint(0,difficulty)
-    num2 = random.randint(1,difficulty)
+    num1 = random.randint(difficulty-5,difficulty)
+    num2 = random.randint(difficulty-4,difficulty)
     op = random.choice(list(ops.keys()))
     nums = [num1, op, num2]
     return nums

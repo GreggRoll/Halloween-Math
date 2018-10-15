@@ -6,12 +6,17 @@ window_len = 1280
 window_width = 720
 win = pygame.display.set_mode((window_len, window_width))
 pygame.display.set_caption("Halloween Math")
-char = pygame.image.load('ghost-trick-or-treating-hi.png')
+#system font
+font = pygame.font.SysFont('comicsans', 30, True)
+#images
+bg = pygame.image.load('graveyard(1280x720).png')
+    #TODO
+    #add 5 more headstones to work as progress markers
 u_dead = pygame.image.load('youdied.png')
+char = pygame.image.load('ghost-trick-or-treating-hi.png')
     #TODO
     #crop out whitespace on undertale
     #create animated frames for movement
-
 #input box rect
 input_box = pygame.Rect(540, 250, 100, 32)
 text = ''
@@ -19,14 +24,15 @@ active = False
 color_inactive = pygame.Color('lightskyblue3')
 color_active = pygame.Color('dodgerblue2')
 color = color_inactive
-
-#creates retry button using class from game
+#buttons
 retry = button((255,255,255), 540, 500, 200, 75, 'Retry?')
 newgame = button((255,255,255), 540, 500, 200, 75, 'Next level?')
-
-bg = pygame.image.load('graveyard(1280x720).png')
-    #TODO
-    #add 5 more headstones to work as progress markers
+#character dimensions will be in a class later
+x = 83
+y = 560
+char_width = 10
+char_height = 10
+#game elements
 progress = 0
     #TODO
     #5 for now
@@ -37,21 +43,11 @@ dead = False
     #create graphics for lives
     #can use for i in lives draw(life.png) x + 50
 
-font = pygame.font.SysFont('comicsans', 30, True)
-
-    #TODO 
-    #create class for user
-x = 83
-y = 560
-char_width = 10
-char_height = 10
-
-
 def redrawGameWindow():
     #draw background
     win.blit(bg, (0,0))
     #draw current level
-    level_text = (font.render(f'level: {level}', 1, (0, 0, 0)))
+    level_text = font.render(f'level: {level}', 1, (0, 0, 0), (160, 160, 160))
     win.blit(level_text, (1150, 10))
     #draw health with background
     health = font.render(f'lives: {lives} ', 1, (255,255,255))#81x21
