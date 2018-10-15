@@ -20,6 +20,8 @@ color_inactive = pygame.Color('lightskyblue3')
 color_active = pygame.Color('dodgerblue2')
 color = color_inactive
 
+retry = button((255,255,255), 640, 500, 100, 100, 'Retry?')
+
 bg = pygame.image.load('graveyard(1280x720).png')
     #TODO
     #add 10 headstones to work as progress markers
@@ -27,7 +29,6 @@ progress = 0
     #TODO
     #if progress = 10 make it so game is over and halloween candy flies around or somthing
 lives = 3
-
     #TODO
     #create graphics for lives
     #can use for i in lives draw(life.png) x + 50
@@ -63,7 +64,7 @@ def redrawGameWindow():
     pygame.draw.rect(win, (255, 100, 0), input_box, 2)
     if dead == True:
         win.blit(u_dead, (0, 0, 1280, 720))
-
+        retry.draw(win)
     pygame.display.update()
 
 #main loop
@@ -119,12 +120,14 @@ while 1:
                     redrawGameWindow()
             else:
                 lives -= 1
+                if lives == 0:
+                    dead = True
                 getnewquestion = True
         redrawGameWindow()
     while dead == True:
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_RETURN:
-                lives = 3
+        if retry.isclicked:
+            lives = 3
+            dead = False
         redrawGameWindow()
         
 
