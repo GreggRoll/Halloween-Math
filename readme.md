@@ -1,6 +1,6 @@
-#Hello
+Hello
 
-[](screenshot.PNG)
+![Screenshot](screenshot.PNG)
 
 This is a small spooky mathgame
 ideally it will have 10 questions you must answer
