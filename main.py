@@ -20,7 +20,8 @@ color_inactive = pygame.Color('lightskyblue3')
 color_active = pygame.Color('dodgerblue2')
 color = color_inactive
 
-retry = button((255,255,255), 640, 500, 100, 100, 'Retry?')
+#creates retyr button using class from game
+retry = button((255,255,255), 590, 500, 100, 100, 'Retry?')
 
 bg = pygame.image.load('graveyard(1280x720).png')
     #TODO
@@ -29,6 +30,7 @@ progress = 0
     #TODO
     #if progress = 10 make it so game is over and halloween candy flies around or somthing
 lives = 3
+dead = False
     #TODO
     #create graphics for lives
     #can use for i in lives draw(life.png) x + 50
@@ -79,6 +81,7 @@ question = questionText(nums)
 answer = str(getAnswer(nums))
 getnewquestion = False
 while 1:
+    redrawGameWindow()
     pygame.time.delay(100)
     if lives <= 0:
         dead = True
@@ -90,16 +93,11 @@ while 1:
             question = questionText(nums)
             answer = str(getAnswer(nums))
             getnewquestion = False
-            text = ''
-        #make somthing so that a screen apears when lives are less than 0
-        
+            text = ''  
         done = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-            #TODO
-            #store input and compare once random questions is working
-            #will need to try/except incase anyone tries to use letters
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
                     print(text)
@@ -125,10 +123,17 @@ while 1:
                 getnewquestion = True
         redrawGameWindow()
     while dead == True:
-        if retry.isclicked:
-            lives = 3
-            dead = False
-        redrawGameWindow()
+        for event in pygame.event.get():
+            pos = pygame.mouse.get_pos()
+
+            if event.type == pygame.QUIT:
+                pygame.quit()
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if retry.isOver(pos):
+                    lives = 3
+                    dead = False
+                
         
 
     if progress == 5:
