@@ -22,7 +22,7 @@ color = color_inactive
 
 #creates retry button using class from game
 retry = button((255,255,255), 540, 500, 200, 75, 'Retry?')
-newgame = button((255,255,255), 540, 500, 200, 75, 'New game?')
+newgame = button((255,255,255), 540, 500, 200, 75, 'Next level?')
 
 bg = pygame.image.load('graveyard(1280x720).png')
     #TODO
@@ -50,6 +50,9 @@ char_height = 10
 def redrawGameWindow():
     #draw background
     win.blit(bg, (0,0))
+    #draw current level
+    level_text = (font.render(f'level: {level}', 1, (0, 0, 0)))
+    win.blit(level_text, (1150, 10))
     #draw health with background
     health = font.render(f'lives: {lives} ', 1, (255,255,255))#81x21
     pygame.draw.rect(win,(160,160,160), (589.5, 90, 105, 41))
@@ -81,9 +84,10 @@ run = True
 getnewquestion = False
 
 
+difficulty = 10
+level = 1
 
-
-nums = randomCalc()
+nums = randomCalc(difficulty)
 question = questionText(nums)
 answer = str(getAnswer(nums))
 getnewquestion = False
@@ -97,7 +101,7 @@ while 1:
         dead = False
     while dead == False:
         if getnewquestion == True:
-            nums = randomCalc()
+            nums = randomCalc(difficulty)
             question = questionText(nums)
             answer = str(getAnswer(nums))
             getnewquestion = False
@@ -134,10 +138,12 @@ while 1:
                             pygame.quit()
                         if event.type == pygame.MOUSEBUTTONDOWN:
                             if newgame.isOver(pos):
-                                lives = 3
                                 progress = 0
                                 x = 83
                                 done = False
+                                difficulty += 2
+                                level += 1
+                                lives += 1
             else:
                 lives -= 1
                 if lives == 0:
@@ -156,6 +162,8 @@ while 1:
                     lives = 3
                     dead = False
                     x = 83
+                    level = 1
+                    difficulty = 10
 
     
     redrawGameWindow()

@@ -3,12 +3,12 @@ import operator
 import pygame
 
 
-def randomCalc():
+def randomCalc(difficulty):
     ops = {'+':operator.add,
            '-':operator.sub,
            '*':operator.mul,}
-    num1 = random.randint(0,10)
-    num2 = random.randint(1,10)
+    num1 = random.randint(0,difficulty)
+    num2 = random.randint(1,difficulty)
     op = random.choice(list(ops.keys()))
     nums = [num1, op, num2]
     return nums
