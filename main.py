@@ -20,14 +20,16 @@ color_inactive = pygame.Color('lightskyblue3')
 color_active = pygame.Color('dodgerblue2')
 color = color_inactive
 
-#creates retyr button using class from game
-retry = button((255,255,255), 590, 500, 100, 100, 'Retry?')
+#creates retry button using class from game
+retry = button((255,255,255), 540, 500, 200, 75, 'Retry?')
+newgame = button((255,255,255), 540, 500, 200, 75, 'New game?')
 
 bg = pygame.image.load('graveyard(1280x720).png')
     #TODO
-    #add 10 headstones to work as progress markers
+    #add 5 more headstones to work as progress markers
 progress = 0
     #TODO
+    #5 for now
     #if progress = 10 make it so game is over and halloween candy flies around or somthing
 lives = 3
 dead = False
@@ -64,9 +66,14 @@ def redrawGameWindow():
     input_box.w = width
     win.blit(answer_txt, (input_box.x+5, input_box.y+5))
     pygame.draw.rect(win, (255, 100, 0), input_box, 2)
+    
     if dead == True:
         win.blit(u_dead, (0, 0, 1280, 720))
         retry.draw(win)
+    if progress == 5:
+        #TODO
+        #make screen or animation for winning
+        newgame.draw(win)
     pygame.display.update()
 
 #main loop
@@ -83,6 +90,7 @@ getnewquestion = False
 while 1:
     redrawGameWindow()
     pygame.time.delay(100)
+    
     if lives <= 0:
         dead = True
     else:
@@ -100,8 +108,9 @@ while 1:
                 pygame.quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
-                    print(text)
-                    print(answer)
+                    print(f'your answer: {text}')
+                    print(f'correct answer: {answer}')
+                    print(f'you are at {progress}/5')
                     done = True
                 elif event.key == pygame.K_BACKSPACE:
                     text = text[:-1]
@@ -116,6 +125,19 @@ while 1:
                 for i in range(20):
                     x += 10.25
                     redrawGameWindow()
+                while progress >= 5:
+                    #make screen freeze so you cant input more
+                    redrawGameWindow()
+                    for event in pygame.event.get():
+                        pos = pygame.mouse.get_pos()
+                        if event.type == pygame.QUIT:
+                            pygame.quit()
+                        if event.type == pygame.MOUSEBUTTONDOWN:
+                            if newgame.isOver(pos):
+                                lives = 3
+                                progress = 0
+                                x = 83
+                                done = False
             else:
                 lives -= 1
                 if lives == 0:
@@ -133,12 +155,8 @@ while 1:
                 if retry.isOver(pos):
                     lives = 3
                     dead = False
-                
-        
+                    x = 83
 
-    if progress == 5:
-        pass
-        #TODO you win!
     
     redrawGameWindow()
 

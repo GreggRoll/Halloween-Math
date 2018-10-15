@@ -57,3 +57,14 @@ class button():
             
             return False
 
+def get_click(button):
+    for event in pygame.event.get():
+        pos = pygame.mouse.get_pos()
+
+        if event.type == pygame.QUIT:
+            pygame.quit()
+
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if button.isOver(pos):
+                lives = 3
+                dead = False

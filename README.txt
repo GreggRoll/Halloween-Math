@@ -5,7 +5,7 @@ if you get one wrong you lose a life lose all 3 lives
 
 problems list by importance(top-to-bottom)
 
-    center question
+    create animation or ovewrlay for when someone wins
     create class for user to clean up code
     create graphics for lives(maybe some kind of pixel heart?)
     fix sprite(animation)
@@ -13,7 +13,6 @@ problems list by importance(top-to-bottom)
     add background music
     add 2nd frame
         after reaching 5 i want the window to scroll to the 2nd pane where #10 will be a little party / the gate for trick-or-treating
-    code button at top-right to restart
 
 -------------------
 Hello, to use pygame activate virtual env and
